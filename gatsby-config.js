@@ -9,6 +9,18 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: "gatsby-plugin-react-helmet",
+    },
+    {
+      resolve: "gatsby-plugin-slug-field",
+      options: {
+        baseField: "title",
+        fieldName: "portfolioItemSlug",
+        nodeType: "ContentfulPortfolioItem",
+        uniqueSlugs: true,
+      },
+    },
+    {
       resolve: "gatsby-source-contentful",
       options: {
         accessToken: process.env.CONTENTFUL_DELIVERY_API,
