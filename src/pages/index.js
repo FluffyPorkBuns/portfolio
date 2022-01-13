@@ -5,8 +5,8 @@ import Layout from "../components/layout";
 import ProjectGallery from "../components/projectGallery";
 
 // styled components
-const StyledH1 = tw.h1`
-  font-bold text-3xl
+const StyledH2 = tw.h2`
+  text-2xl font-bold mb-4
 `;
 
 // graphql queries to get the portfolio gallery
@@ -32,9 +32,7 @@ export const portfolioItems = graphql`
 const IndexPage = ({ data }) => {
   return (
     <Layout>
-      <StyledH1>Fluffy Pork Bun's Front End Developer Portfolio</StyledH1>
-      <p>Creating beautiful and accessible websites for everyone</p>
-      <h2>Recent Work</h2>
+      <StyledH2>Recent Work</StyledH2>
       <ProjectGallery portfolioItems={data.allContentfulPortfolioItem} />
     </Layout>
   );

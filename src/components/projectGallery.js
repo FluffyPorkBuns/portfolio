@@ -1,19 +1,19 @@
 import * as React from "react";
-import tw, { styled } from "twin.macro";
+import tw, { styled, theme } from "twin.macro";
 import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 // styled components
 const StyledList = tw.ul`
-  list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-14
+  list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5
 `;
 const ListTitle = styled.h3`
-  color: #804cca;
+  color: ${theme`colors.purple`};
   ${tw`font-bold`}
 `;
 const StyledItem = styled.li`
-  background: #53b7e3;
-  color: rgb(12, 10, 18);
+  background: ${theme`colors.teal`};
+  color: ${theme`colors.black`};
   ${tw`rounded-md`}
   ${tw`p-4`}
   ${tw`relative`}
