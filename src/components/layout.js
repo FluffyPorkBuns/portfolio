@@ -5,21 +5,18 @@ import { Helmet } from "react-helmet";
 
 // styled components
 const StyledMain = styled.main`
-  background: ${theme`colors.dark`};
+  background: ${theme`colors.offWhite`};
   color: ${theme`colors.gray`};
   ${tw`font-sans`};
 `;
-const StyledContainer = tw.div`
-  max-w-4xl mx-auto p-6
-`;
 const SiteHeader = styled.header`
-  ${tw`pt-16`};
-  ${tw`pb-8`};
+  ${tw`pt-28`};
+  ${tw`pb-12`};
 `;
 const StyledH1 = styled.h1`
-  color: ${theme`colors.teal`};
+  color: ${theme`colors.dark`};
   ${tw`font-semibold`};
-  ${tw`text-4xl`};
+  ${tw`text-5xl`};
   ${tw`text-center`};
   ${tw`mb-6`};
 `;
@@ -30,7 +27,7 @@ const HeaderBlurb = styled.p`
 `;
 const myGlobalStyles = `
   html {
-    background: ${theme`colors.dark`};
+    background: ${theme`colors.offWhite`};
   }
 `;
 export default function Layout({ title, children }) {
@@ -50,15 +47,13 @@ export default function Layout({ title, children }) {
       />
       <SiteHeader>
         <StyledH1>
-          {process.env.GATSBY_PORTFOLIO_PERSON}'s Front End Developer Portfolio
+          {process.env.GATSBY_PORTFOLIO_PERSON}, Frontend Engineer
         </StyledH1>
         <HeaderBlurb>
           Creating beautiful and accessible websites for everyone!
         </HeaderBlurb>
       </SiteHeader>
-      <StyledMain>
-        <StyledContainer>{children}</StyledContainer>
-      </StyledMain>
+      <StyledMain>{children}</StyledMain>
     </div>
   );
 }

@@ -1,12 +1,20 @@
 import * as React from "react";
-import tw from "twin.macro";
+import tw, { styled, theme } from "twin.macro";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import ProjectGallery from "../components/projectGallery";
 
+import Container from "../components/container";
+
 // styled components
-const StyledH2 = tw.h2`
-  text-2xl font-bold mb-4
+const StyledH2 = styled.h2`
+  color: ${theme`colors.offWhite`};
+  ${tw`text-2xl`}
+  ${tw`font-bold`}
+  ${tw`mb-6`}
+`;
+const DarkSection = styled.div`
+  background: ${theme`colors.purple`};
 `;
 
 // graphql queries to get the portfolio gallery
@@ -32,8 +40,12 @@ export const portfolioItems = graphql`
 const IndexPage = ({ data }) => {
   return (
     <Layout>
-      <StyledH2>Recent Work</StyledH2>
-      <ProjectGallery portfolioItems={data.allContentfulPortfolioItem} />
+      <DarkSection>
+        <Container>
+          <StyledH2>Recent Work</StyledH2>
+          <ProjectGallery portfolioItems={data.allContentfulPortfolioItem} />
+        </Container>
+      </DarkSection>
     </Layout>
   );
 };

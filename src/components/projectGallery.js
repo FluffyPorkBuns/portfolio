@@ -8,7 +8,7 @@ const StyledList = tw.ul`
   list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5
 `;
 const ListTitle = styled.h3`
-  color: ${theme`colors.purple`};
+  color: ${theme`colors.dark`};
   ${tw`font-bold`}
 `;
 const StyledItem = styled.li`
@@ -21,10 +21,12 @@ const StyledItem = styled.li`
   ${tw`transform`}
   ${tw`hover:-translate-y-1`}
   ${tw`transition-all`}
+  ${tw`pb-8`}
 `;
 const StyledItemImage = styled.div`
   width: 237px;
   height: 180px;
+  ${tw`drop-shadow-md`}
   ${tw`-mt-14`}
   ${tw`mb-2`}
   ${tw`relative`}
@@ -44,7 +46,6 @@ const ProjectGallery = ({ portfolioItems }) => {
           />
         </StyledItemImage>
         <ListTitle>{item.node.title}</ListTitle>
-        <p>{item.node.content}</p>
       </Link>
     </StyledItem>
   ));
