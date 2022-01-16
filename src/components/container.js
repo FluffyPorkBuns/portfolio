@@ -3,8 +3,21 @@ import tw from "twin.macro";
 
 // styled components
 const StyledContainer = tw.div`
-  max-w-4xl mx-auto px-6 pt-12 pb-24
+  max-w-4xl
+  mx-auto
+  py-6
+  px-6
+  mb-6
+  md:pt-12
+  md:pb-24
+  `;
+const LessPaddingContainer = tw(StyledContainer)`
+  md:py-6
+  md:mb-0
 `;
-export default function Container({ children }) {
+export default function Container({ lessPadding, children }) {
+  if (lessPadding) {
+    return <LessPaddingContainer>{children}</LessPaddingContainer>;
+  }
   return <StyledContainer>{children}</StyledContainer>;
 }

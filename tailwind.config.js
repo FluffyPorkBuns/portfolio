@@ -1,7 +1,9 @@
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: false, // or 'media' or 'class'
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    fontFamily: {
+      sans: ["Open Sans"],
+    },
     colors: {
       offWhite: "#f5f3ff",
       black: "#191919",

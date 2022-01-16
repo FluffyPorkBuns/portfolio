@@ -9,6 +9,9 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: "gatsby-plugin-fontawesome-css",
+    },
+    {
       resolve: "gatsby-plugin-react-helmet",
     },
     {
@@ -31,12 +34,6 @@ module.exports = {
     "gatsby-plugin-styled-components",
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-image",
-    // {
-    //   resolve: "gatsby-plugin-google-analytics",
-    //   options: {
-    //     trackingId: "",
-    //   },
-    // },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {

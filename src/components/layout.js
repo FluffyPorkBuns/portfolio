@@ -1,33 +1,43 @@
 import * as React from "react";
-import tw, { GlobalStyles, styled, theme } from "twin.macro";
+import tw, { GlobalStyles, theme } from "twin.macro";
 import { Global, css } from "@emotion/react";
 import { Helmet } from "react-helmet";
 
+import Logo from "../components/logo";
+import Footer from "../components/footer";
+
 // styled components
-const StyledMain = styled.main`
-  background: ${theme`colors.offWhite`};
-  color: ${theme`colors.gray`};
-  ${tw`font-sans`};
+const StyledMain = tw.main`
+  bg-offWhite
+  text-gray
+  font-sans
 `;
-const SiteHeader = styled.header`
-  ${tw`pt-28`};
-  ${tw`pb-12`};
+const SiteHeader = tw.header`
+  pt-10
+  pb-20
+  md:pt-28
+  md:pb-20
 `;
-const StyledH1 = styled.h1`
-  color: ${theme`colors.dark`};
-  ${tw`font-semibold`};
-  ${tw`text-5xl`};
-  ${tw`text-center`};
-  ${tw`mb-6`};
+const StyledH1 = tw.h1`
+  text-dark
+  font-semibold
+  text-3xl
+  lg:text-5xl
+  text-center
+  mb-6
 `;
-const HeaderBlurb = styled.p`
-  color: ${theme`colors.gray`};
-  ${tw`text-2xl`};
-  ${tw`text-center`};
+const HeaderBlurb = tw.p`
+  text-gray
+  text-xl
+  lg:text-2xl
+  text-center
 `;
 const myGlobalStyles = `
   html {
     background: ${theme`colors.offWhite`};
+  }
+  body {
+    font-family: "Open Sans";
   }
 `;
 export default function Layout({ title, children }) {
@@ -46,14 +56,16 @@ export default function Layout({ title, children }) {
         `}
       />
       <SiteHeader>
+        <Logo />
         <StyledH1>
           {process.env.GATSBY_PORTFOLIO_PERSON}, Frontend Engineer
         </StyledH1>
         <HeaderBlurb>
-          Creating beautiful and accessible websites for everyone!
+          Creating functional and accessible websites for everyone!
         </HeaderBlurb>
       </SiteHeader>
       <StyledMain>{children}</StyledMain>
+      <Footer />
     </div>
   );
 }

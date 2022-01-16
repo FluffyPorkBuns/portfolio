@@ -1,1 +1,1 @@
-// import "tailwindcss/base.css";
+import "@fontsource/open-sans";
