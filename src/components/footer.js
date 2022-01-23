@@ -36,30 +36,36 @@ const LinkIcon = tw(FontAwesomeIcon)`
   group-hover:text-purple
   transition-all
 `;
-export default function Footer() {
+export default function Footer({ links }) {
+  // list of links to be rendered in the footer
+  const linkList = [
+    { title: "linkedin", icon: faLinkedinIn },
+    { title: "github", icon: faGithub },
+  ];
+
+  // renders all the links in linkList
+  const renderLinkItem = function (linkData, links) {
+    // get database entry for this link item
+    const linkItem = links.edges.find(
+      (l) => l.node.title === linkData.title,
+    ).node;
+
+    return (
+      <LogoLinkListItem>
+        <LogoLink href={linkItem.url} className="group">
+          <LinkIcon icon={linkData.icon} className="group-hover:text-purple" />
+          <LinkCaption>{linkItem.description}</LinkCaption>
+        </LogoLink>
+      </LogoLinkListItem>
+    );
+  };
+
   return (
     <FooterWrap>
       <Container lessPadding>
+        <h2></h2>
         <LogoLinkList>
-          <LogoLinkListItem>
-            <LogoLink href={process.env.GATSBY_URL_LINKEDIN} className="group">
-              <LinkIcon
-                icon={faLinkedinIn}
-                className="group-hover:text-purple"
-              />
-              <LinkCaption>LinkedIn</LinkCaption>
-            </LogoLink>
-          </LogoLinkListItem>
-          <LogoLinkListItem>
-            <LogoLink href={process.env.GATSBY_URL_GITHUB} className="group">
-              <LinkIcon
-                icon={faGithub}
-                className="group-hover:text-purple"
-                size="2x"
-              />
-              <LinkCaption>GibHub</LinkCaption>
-            </LogoLink>
-          </LogoLinkListItem>
+          {linkList.map((l) => renderLinkItem(l, links))}
         </LogoLinkList>
       </Container>
     </FooterWrap>

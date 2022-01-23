@@ -7,7 +7,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allContentfulPortfolioItem(sort: { fields: createdAt, order: DESC }) {
+        portfolio: allContentfulPortfolioItem(
+          sort: { fields: createdAt, order: DESC }
+        ) {
           edges {
             node {
               id
@@ -20,6 +22,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+        externalLink: allContentfulExternalLink {
+          edges {
+            node {
+              title
+              url
+              description
+            }
+          }
+        }
       }
     `,
   );
@@ -28,17 +39,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
     return;
   }
-  // Create pages for each markdown file.
+  // Create pages for each portfolio item
   const projectPageTemplate = path.resolve(`./templates/project-pages.js`);
-  result.data.allContentfulPortfolioItem.edges.forEach(({ node }) => {
+  result.data.portfolio.edges.forEach(({ node }) => {
     const path = node.portfolioItemSlug;
     createPage({
       path,
       component: projectPageTemplate,
-      // In your blog post template's graphql query, you can use pagePath
-      // as a GraphQL variable to query for data from the markdown file.
+      // pass portfolio data and footer links to project page template
       context: {
         project: node,
+        links: result.data.externalLink,
       },
     });
   });

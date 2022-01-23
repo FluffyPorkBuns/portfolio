@@ -40,7 +40,7 @@ const myGlobalStyles = `
     font-family: "Open Sans";
   }
 `;
-export default function Layout({ title, children }) {
+export default function Layout({ links, title, children }) {
   return (
     <div>
       <Helmet>
@@ -65,7 +65,7 @@ export default function Layout({ title, children }) {
         </HeaderBlurb>
       </SiteHeader>
       <StyledMain>{children}</StyledMain>
-      <Footer />
+      <Footer links={links} />
     </div>
   );
 }

@@ -15,6 +15,12 @@ const StyledH2 = tw.h2`
   font-bold
   mb-6
 `;
+const StyledP = tw.p`
+  text-lg
+  font-normal
+  text-offWhite
+  font-sans
+`;
 const StyledH2Dark = tw(StyledH2)`
   text-dark
 `;
@@ -25,7 +31,9 @@ const DarkSection = tw.div`
 // graphql queries to get the portfolio gallery
 export const portfolioItems = graphql`
   query {
-    allContentfulPortfolioItem(sort: { fields: createdAt, order: DESC }) {
+    portfolio: allContentfulPortfolioItem(
+      sort: { fields: createdAt, order: DESC }
+    ) {
       edges {
         node {
           id
@@ -38,21 +46,45 @@ export const portfolioItems = graphql`
         }
       }
     }
+    blurb: allContentfulBlurb {
+      edges {
+        node {
+          byline
+          title
+          content {
+            content
+          }
+        }
+      }
+    }
+    externalLink: allContentfulExternalLink {
+      edges {
+        node {
+          title
+          url
+          description
+        }
+      }
+    }
   }
 `;
-// TODO: add blurb to first section
 // markup
 const IndexPage = ({ data }) => {
+  const missionStatement = data.blurb.edges.find(
+    (b) => b.node.title === "mission statement",
+  ).node;
+
   return (
-    <Layout>
+    <Layout links={data.externalLink}>
       <DarkSection>
         <Container>
-          <StyledH2>The Web is for Everyone</StyledH2>
+          <StyledH2>{missionStatement.byline}</StyledH2>
+          <StyledP>{missionStatement.content.content}</StyledP>
         </Container>
       </DarkSection>
       <Container>
         <StyledH2Dark>Recent Work</StyledH2Dark>
-        <ProjectGallery portfolioItems={data.allContentfulPortfolioItem} />
+        <ProjectGallery portfolioItems={data.portfolio} />
       </Container>
     </Layout>
   );
