@@ -7,7 +7,7 @@ import Container from "../components/container";
 
 // styled components
 const FooterWrap = tw.footer`
-  flex justify-center items-center bg-purple
+  flex justify-center items-center bg-purple mt-20
 `;
 const LogoLinkList = tw.ul`
   flex
@@ -63,8 +63,10 @@ export default function Footer({ links }) {
   return (
     <FooterWrap>
       <Container lessPadding>
-        <h2></h2>
-        <LogoLinkList>
+        <h2 id="link-list-title" className="sr-only">
+          Social media links
+        </h2>
+        <LogoLinkList aria-labelledby="link-list-title">
           {linkList.map((l) => renderLinkItem(l, links))}
         </LogoLinkList>
       </Container>
