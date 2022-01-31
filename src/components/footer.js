@@ -51,7 +51,7 @@ export default function Footer({ links }) {
     ).node;
 
     return (
-      <LogoLinkListItem>
+      <LogoLinkListItem key={linkItem.id}>
         <LogoLink href={linkItem.url} className="group">
           <LinkIcon icon={linkData.icon} className="group-hover:text-purple" />
           <LinkCaption>{linkItem.description}</LinkCaption>

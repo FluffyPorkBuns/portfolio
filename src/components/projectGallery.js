@@ -1,57 +1,61 @@
 import * as React from "react";
 import tw from "twin.macro";
-import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 // styled components
 const StyledList = tw.ul`
   list-none
-  grid
-  grid-cols-1
-  md:grid-cols-2
-  lg:grid-cols-3
-  gap-5
 `;
 const ListTitle = tw.h3`
   text-purple
   font-bold
+  text-xl
+  mb-4
 `;
 const StyledItem = tw.li`
-  bg-teal
+  p-8
+  pb-20
+  flex
+  even:flex-row-reverse
+  odd:bg-teal
   text-dark
   rounded-md
   relative
   md:mt-12
-  lg:hover:-translate-y-1
-  transition-all
   font-sans
 `;
 const StyledItemImage = tw.div`
-  w-full
-  md:h-48
-  md:-mt-14
-  mb-2
+  odd:mr-8
+  even:ml-8
   relative
   rounded-md
   overflow-hidden
 `;
-const StyledLink = tw(Link)`
-  block p-4 pb-8
+const ContentWrap = tw.div`
+  odd:ml-8
+  even:mr-8
 `;
 
 // markup
 const ProjectGallery = ({ portfolioItems }) => {
+  const renderTags = ({ tags, id }) =>
+    tags.map((tag, index) => <li key={`${id}-${index}`}>{tag}</li>);
   const renderPortfolioItems = portfolioItems.edges.map((item) => (
     <StyledItem key={item.node.id}>
-      <StyledLink to={`/${item.node.portfolioItemSlug}`}>
-        <StyledItemImage>
-          <GatsbyImage
-            image={getImage(item.node.thumbnail)}
-            alt={item.node.title}
-          />
-        </StyledItemImage>
+      <StyledItemImage>
+        <GatsbyImage
+          image={getImage(item.node.thumbnail)}
+          alt={item.node.title}
+        />
+      </StyledItemImage>
+      <ContentWrap>
         <ListTitle>{item.node.title}</ListTitle>
-      </StyledLink>
+        <p>{item.node.content}</p>
+        <h4 id={`technologies-${item.node.id}`}>Technologies</h4>
+        <ul aria-describedby={`technologies-${item.node.id}`}>
+          {renderTags({ tags: item.node.technologies, id: item.node.id })}
+        </ul>
+      </ContentWrap>
     </StyledItem>
   ));
 

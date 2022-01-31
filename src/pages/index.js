@@ -39,6 +39,8 @@ export const portfolioItems = graphql`
           id
           title
           content
+          portfolioItemSlug
+          technologies
           thumbnail {
             gatsbyImageData
           }
@@ -60,6 +62,7 @@ export const portfolioItems = graphql`
     externalLink: allContentfulExternalLink {
       edges {
         node {
+          id
           title
           url
           description
