@@ -86,7 +86,7 @@ const IndexPage = ({ data }) => {
         </Container>
       </DarkSection>
       <Container>
-        <StyledH2Dark>Recent Work</StyledH2Dark>
+        <StyledH2Dark>Check out what I've worked on:</StyledH2Dark>
         <ProjectGallery portfolioItems={data.portfolio} />
       </Container>
     </Layout>

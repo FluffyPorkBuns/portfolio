@@ -10,19 +10,25 @@ const ListTitle = tw.h3`
   text-purple
   font-bold
   text-xl
-  mb-4
+  mb-2
 `;
 const StyledItem = tw.li`
-  p-8
+  p-6
   pb-20
+  pt-14
+  md:pt-6
   flex
-  even:flex-row-reverse
+  flex-col
+  md:flex-row
+  md:even:flex-row-reverse
   odd:bg-teal
   text-dark
-  rounded-md
+  md:rounded-md
   relative
   md:mt-12
   font-sans
+  -mx-6
+  md:mx-0
 `;
 const StyledItemImage = tw.div`
   odd:mr-8
@@ -30,17 +36,48 @@ const StyledItemImage = tw.div`
   relative
   rounded-md
   overflow-hidden
+  mb-4
 `;
 const ContentWrap = tw.div`
   odd:ml-8
   even:mr-8
 `;
+const TechnologyList = tw.ul`
+  flex
+  flex-wrap
+`;
+const TechnologyTag = tw.li`
+  bg-gray
+  bg-opacity-10
+  rounded-md
+  py-1
+  px-4
+  lowercase
+  mr-3
+  mb-2
+  text-sm
+  font-medium
+`;
+const TechnologyTitle = tw.h4`
+  mt-8
+  mb-2
+  font-semibold
+  text-gray
+`;
 
 // markup
 const ProjectGallery = ({ portfolioItems }) => {
-  const renderTags = ({ tags, id }) =>
-    tags.map((tag, index) => <li key={`${id}-${index}`}>{tag}</li>);
-  const renderPortfolioItems = portfolioItems.edges.map((item) => (
+  const renderTags = ({ tags, id, isOdd }) =>
+    tags.map((tag, index) => (
+      <TechnologyTag
+        key={`${id}-${index}`}
+        style={{ background: isOdd ? "#ffffffaa" : "" }}
+      >
+        {tag}
+      </TechnologyTag>
+    ));
+
+  const renderPortfolioItems = portfolioItems.edges.map((item, index) => (
     <StyledItem key={item.node.id}>
       <StyledItemImage>
         <GatsbyImage
@@ -51,10 +88,19 @@ const ProjectGallery = ({ portfolioItems }) => {
       <ContentWrap>
         <ListTitle>{item.node.title}</ListTitle>
         <p>{item.node.content}</p>
-        <h4 id={`technologies-${item.node.id}`}>Technologies</h4>
-        <ul aria-describedby={`technologies-${item.node.id}`}>
-          {renderTags({ tags: item.node.technologies, id: item.node.id })}
-        </ul>
+        <TechnologyTitle
+          id={`technologies-${item.node.id}`}
+          css={[index % 2 === 0 && tw`text-blue`]}
+        >
+          Technologies:
+        </TechnologyTitle>
+        <TechnologyList aria-describedby={`technologies-${item.node.id}`}>
+          {renderTags({
+            tags: item.node.technologies,
+            id: item.node.id,
+            isOdd: index % 2 === 0,
+          })}
+        </TechnologyList>
       </ContentWrap>
     </StyledItem>
   ));

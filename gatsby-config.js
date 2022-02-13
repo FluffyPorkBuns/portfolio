@@ -9,6 +9,14 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /images/,
+        },
+      },
+    },
+    {
       resolve: "gatsby-plugin-fontawesome-css",
     },
     {

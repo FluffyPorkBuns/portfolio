@@ -15,9 +15,9 @@ const LessPaddingContainer = tw(StyledContainer)`
   md:py-6
   md:mb-0
 `;
-export default function Container({ lessPadding, children }) {
+export default function Container({ lessPadding, children, ...rest }) {
   if (lessPadding) {
-    return <LessPaddingContainer>{children}</LessPaddingContainer>;
+    return <LessPaddingContainer {...rest}>{children}</LessPaddingContainer>;
   }
-  return <StyledContainer>{children}</StyledContainer>;
+  return <StyledContainer {...rest}>{children}</StyledContainer>;
 }
