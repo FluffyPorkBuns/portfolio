@@ -191,10 +191,10 @@ export default function Footer({ links }) {
           </LogoLinkList>
         </FooterSection>
         <FooterSection>
-          <FooterTitle id="link-list-title">
+          <FooterTitle id="technology-list-title">
             I made this page using:
           </FooterTitle>
-          <LogoLinkList aria-labelledby="link-list-title">
+          <LogoLinkList aria-labelledby="technology-list-title">
             {techList.map((l) => renderLinkItem({ linkData: l, links: links }))}
           </LogoLinkList>
         </FooterSection>

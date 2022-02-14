@@ -3,7 +3,6 @@ import tw, { GlobalStyles, theme } from "twin.macro";
 import { Global, css } from "@emotion/react";
 import { Helmet } from "react-helmet";
 
-import Logo from "../components/logo";
 import Footer from "../components/footer";
 
 // styled components
@@ -13,8 +12,8 @@ const StyledMain = tw.main`
   font-sans
 `;
 const SiteHeader = tw.header`
-  pt-10
-  pb-20
+  pt-12
+  pb-16
   md:pt-28
   md:pb-20
 `;
@@ -44,8 +43,9 @@ export default function Layout({ links, title, children }) {
   return (
     <div>
       <Helmet>
+        <html lang="en" />
         <meta charSet="utf-8" />
-        <title>{`${process.env.GATSBY_PORTFOLIO_PERSON}'s Portfolio${
+        <title lang="en">{`${process.env.GATSBY_PORTFOLIO_PERSON}'s Portfolio${
           title ? " - " + title : ""
         }`}</title>
       </Helmet>
@@ -56,12 +56,11 @@ export default function Layout({ links, title, children }) {
         `}
       />
       <SiteHeader>
-        <Logo />
         <StyledH1>
           {process.env.GATSBY_PORTFOLIO_PERSON}, Frontend Engineer
         </StyledH1>
         <HeaderBlurb>
-          Creating functional and accessible websites for everyone!
+          Creating functional and accessible websites for everybody!
         </HeaderBlurb>
       </SiteHeader>
       <StyledMain>{children}</StyledMain>

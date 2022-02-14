@@ -11,7 +11,8 @@ import Container from "../components/container";
 const StyledH2 = tw.h2`
   text-offWhite
   font-sans
-  text-2xl
+  text-xl
+  md:text-2xl
   font-bold
   mb-6
 `;
@@ -26,6 +27,10 @@ const StyledH2Dark = tw(StyledH2)`
 `;
 const DarkSection = tw.div`
   bg-purple
+`;
+const DarkContainer = tw(Container)`
+  md:pb-16
+  mb-10
 `;
 
 // graphql queries to get the portfolio gallery
@@ -80,13 +85,13 @@ const IndexPage = ({ data }) => {
   return (
     <Layout links={data.externalLink}>
       <DarkSection>
-        <Container>
+        <DarkContainer>
           <StyledH2>{missionStatement.byline}</StyledH2>
           <StyledP>{missionStatement.content.content}</StyledP>
-        </Container>
+        </DarkContainer>
       </DarkSection>
       <Container>
-        <StyledH2Dark>Check out what I've worked on:</StyledH2Dark>
+        <StyledH2Dark>Check out what I'm working on:</StyledH2Dark>
         <ProjectGallery portfolioItems={data.portfolio} />
       </Container>
     </Layout>
