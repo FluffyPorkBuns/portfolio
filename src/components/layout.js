@@ -45,6 +45,7 @@ export default function Layout({ links, title, children }) {
       <Helmet>
         <html lang="en" />
         <meta charSet="utf-8" />
+        <meta name="robots" content="noindex,nofollow" />
         <title lang="en">{`${process.env.GATSBY_PORTFOLIO_PERSON}'s Portfolio${
           title ? " - " + title : ""
         }`}</title>
