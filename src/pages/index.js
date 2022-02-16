@@ -36,9 +36,7 @@ const DarkContainer = tw(Container)`
 // graphql queries to get the portfolio gallery
 export const portfolioItems = graphql`
   query {
-    portfolio: allContentfulPortfolioItem(
-      sort: { fields: createdAt, order: DESC }
-    ) {
+    portfolio: allContentfulPortfolioItem(sort: { fields: order, order: ASC }) {
       edges {
         node {
           id
@@ -50,6 +48,7 @@ export const portfolioItems = graphql`
             gatsbyImageData
           }
           portfolioItemSlug
+          order
         }
       }
     }
