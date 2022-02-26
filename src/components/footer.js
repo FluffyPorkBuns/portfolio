@@ -44,6 +44,7 @@ const LogoLink = styled.a`
   ${tw`border-offWhite`}
   ${tw`border-2`}
   ${tw`hover:bg-offWhite`}
+  ${tw`focus:bg-offWhite`}
   ${tw`transition-all`}
     & * {
     transition-property: all;

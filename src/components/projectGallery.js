@@ -7,7 +7,7 @@ const StyledList = tw.ul`
   list-none
 `;
 const ListTitle = tw.h3`
-  text-purple
+  text-black
   font-bold
   text-xl
   mb-2
@@ -16,7 +16,7 @@ const StyledItem = tw.li`
   p-6
   pb-20
   pt-14
-  md:pt-6
+  md:p-10
   flex
   flex-col
   md:flex-row
@@ -31,8 +31,6 @@ const StyledItem = tw.li`
   md:mx-0
 `;
 const StyledItemImage = tw.div`
-  odd:mr-8
-  even:ml-8
   relative
   rounded-md
   overflow-hidden
@@ -62,7 +60,7 @@ const TechnologyTitle = tw.h4`
   mt-8
   mb-2
   font-semibold
-  text-gray
+  text-black
 `;
 
 // markup
@@ -79,7 +77,9 @@ const ProjectGallery = ({ portfolioItems }) => {
 
   const renderPortfolioItems = portfolioItems.edges.map((item, index) => (
     <StyledItem key={item.node.id}>
-      <StyledItemImage>
+      <StyledItemImage
+        css={[index % 2 === 0 && tw`mr-8`, index % 2 !== 0 && tw`ml-8`]}
+      >
         <GatsbyImage
           image={getImage(item.node.thumbnail)}
           alt={item.node.title}
@@ -88,10 +88,7 @@ const ProjectGallery = ({ portfolioItems }) => {
       <ContentWrap>
         <ListTitle>{item.node.title}</ListTitle>
         <p>{item.node.content}</p>
-        <TechnologyTitle
-          id={`technologies-${item.node.id}`}
-          css={[index % 2 === 0 && tw`text-blue`]}
-        >
+        <TechnologyTitle id={`technologies-${item.node.id}`}>
           Technologies:
         </TechnologyTitle>
         <TechnologyList aria-describedby={`technologies-${item.node.id}`}>
