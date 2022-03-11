@@ -6,13 +6,15 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 const StyledList = tw.ul`
   list-none
 `;
+// title for this project
 const ListTitle = tw.h3`
   text-black
   font-bold
   text-xl
   mb-2
 `;
-const StyledItem = tw.li`
+// the list item containing the project component
+const StyledItem = tw.article`
   p-6
   pb-20
   pt-14
@@ -20,8 +22,6 @@ const StyledItem = tw.li`
   flex
   flex-col
   md:flex-row
-  md:even:flex-row-reverse
-  odd:bg-teal
   text-dark
   md:rounded-md
   relative
@@ -30,20 +30,19 @@ const StyledItem = tw.li`
   -mx-6
   md:mx-0
 `;
+// project thumbnail image
 const StyledItemImage = tw.div`
   relative
   rounded-md
   overflow-hidden
   mb-4
 `;
-const ContentWrap = tw.div`
-  odd:ml-8
-  even:mr-8
-`;
+// list of tags showing the technologies used for the project
 const TechnologyList = tw.ul`
   flex
   flex-wrap
 `;
+// the tag
 const TechnologyTag = tw.li`
   bg-gray
   bg-opacity-10
@@ -63,7 +62,10 @@ const TechnologyTitle = tw.h4`
   text-black
 `;
 
-// markup
+/**
+ * A gallery of projects with alternating background colors using data from CMS.
+ * Images become stacked on top of content on small screens
+ */
 const ProjectGallery = ({ portfolioItems }) => {
   const renderTags = ({ tags, id, isOdd }) =>
     tags.map((tag, index) => (
@@ -75,32 +77,41 @@ const ProjectGallery = ({ portfolioItems }) => {
       </TechnologyTag>
     ));
 
-  const renderPortfolioItems = portfolioItems.edges.map((item, index) => (
-    <StyledItem key={item.node.id}>
-      <StyledItemImage
-        css={[index % 2 === 0 && tw`mr-8`, index % 2 !== 0 && tw`ml-8`]}
-      >
-        <GatsbyImage
-          image={getImage(item.node.thumbnail)}
-          alt={item.node.title}
-        />
-      </StyledItemImage>
-      <ContentWrap>
-        <ListTitle>{item.node.title}</ListTitle>
-        <p>{item.node.content}</p>
-        <TechnologyTitle id={`technologies-${item.node.id}`}>
-          Technologies:
-        </TechnologyTitle>
-        <TechnologyList aria-describedby={`technologies-${item.node.id}`}>
-          {renderTags({
-            tags: item.node.technologies,
-            id: item.node.id,
-            isOdd: index % 2 === 0,
-          })}
-        </TechnologyList>
-      </ContentWrap>
-    </StyledItem>
-  ));
+  const renderPortfolioItems = portfolioItems.edges.map((item, index) => {
+    const isOdd = index % 2 === 0;
+    return (
+      <li key={item.node.id}>
+        <StyledItem
+          css={[isOdd && tw`bg-teal`, !isOdd && tw`md:flex-row-reverse`]}
+        >
+          <StyledItemImage css={[isOdd ? tw`mr-8` : tw`ml-8`]}>
+            <GatsbyImage
+              image={getImage(item.node.thumbnail)}
+              alt={item.node.title}
+            />
+          </StyledItemImage>
+          <div css={isOdd ? tw`ml-8` : tw`mr-8`}>
+            <header>
+              <ListTitle>{item.node.title}</ListTitle>
+            </header>
+            <p>{item.node.content}</p>
+            <footer>
+              <TechnologyTitle id={`technologies-${item.node.id}`}>
+                Technologies:
+              </TechnologyTitle>
+              <TechnologyList aria-describedby={`technologies-${item.node.id}`}>
+                {renderTags({
+                  tags: item.node.technologies,
+                  id: item.node.id,
+                  isOdd: isOdd,
+                })}
+              </TechnologyList>
+            </footer>
+          </div>
+        </StyledItem>
+      </li>
+    );
+  });
 
   return <StyledList>{renderPortfolioItems}</StyledList>;
 };

@@ -15,6 +15,10 @@ const LessPaddingContainer = tw(StyledContainer)`
   md:py-6
   md:mb-0
 `;
+/**
+ * padded and width-constrained container to keep layouts tidy
+ * all content should be in a container to constrain width
+ */
 export default function Container({ lessPadding, children, ...rest }) {
   if (lessPadding) {
     return <LessPaddingContainer {...rest}>{children}</LessPaddingContainer>;

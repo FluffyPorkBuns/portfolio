@@ -39,9 +39,13 @@ const myGlobalStyles = `
     font-family: "Open Sans";
   }
 `;
-export default function Layout({ links, title, children }) {
+/**
+ * global layout to be used for each page (has site header, footer, meta data)
+ */
+export default function Layout({ links, linkList, techList, title, children }) {
   return (
-    <div>
+    <React.Fragment>
+      {/* react-helmet meta-data and whatnot */}
       <Helmet>
         <html lang="en" />
         <meta charSet="utf-8" />
@@ -50,22 +54,26 @@ export default function Layout({ links, title, children }) {
           title ? " - " + title : ""
         }`}</title>
       </Helmet>
+      {/* tailwind global style provider */}
       <GlobalStyles />
+      {/* custom global style provider */}
       <Global
         styles={css`
           ${myGlobalStyles}
         `}
       />
-      <SiteHeader>
-        <StyledH1>
-          {process.env.GATSBY_PORTFOLIO_PERSON}, Frontend Engineer
-        </StyledH1>
-        <HeaderBlurb>
-          Creating functional and accessible websites for everybody!
-        </HeaderBlurb>
-      </SiteHeader>
-      <StyledMain>{children}</StyledMain>
-      <Footer links={links} />
-    </div>
+      <StyledMain>
+        <SiteHeader>
+          <StyledH1>
+            {process.env.GATSBY_PORTFOLIO_PERSON}, Frontend Engineer
+          </StyledH1>
+          <HeaderBlurb>
+            Creating functional and accessible websites for everybody!
+          </HeaderBlurb>
+        </SiteHeader>
+        {children}
+      </StyledMain>
+      <Footer links={links} linkList={linkList} techList={techList} />
+    </React.Fragment>
   );
 }

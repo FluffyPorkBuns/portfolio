@@ -2,10 +2,18 @@ import * as React from "react";
 import tw from "twin.macro";
 import { graphql } from "gatsby";
 
+import {
+  faLinkedinIn,
+  faGithub,
+  faReact,
+  faFontAwesomeFlag,
+} from "@fortawesome/free-brands-svg-icons";
+
 // component imports
 import Layout from "../components/layout";
 import ProjectGallery from "../components/projectGallery";
 import Container from "../components/container";
+import LogoLinkList from "../components/logoLinkList";
 
 // styled components
 const StyledH2 = tw.h2`
@@ -77,16 +85,87 @@ export const portfolioItems = graphql`
 `;
 // markup
 const IndexPage = ({ data }) => {
+  // find me at links
+  const linkList = [
+    { title: "linkedin", icon: faLinkedinIn, size: "lg", faIcon: true },
+    { title: "github", icon: faGithub, size: "2x", faIcon: true },
+  ];
+
+  // list of technologies for this site
+  const techList = [
+    {
+      id: "gatsby",
+      title: "gatsby",
+      description: "Gatsby",
+      icon: "gatsby",
+      url: "https://www.gatsbyjs.com/",
+    },
+    {
+      id: "react",
+      title: "react",
+      description: "React",
+      url: "https://reactjs.org/",
+      icon: faReact,
+      faIcon: true,
+      size: "2x",
+    },
+    {
+      id: "GraphQL",
+      title: "GraphQL",
+      description: "GraphQL",
+      icon: "graphQL",
+      url: "https://graphql.org/",
+    },
+    {
+      id: "tailwindcss",
+      title: "tailwindcss",
+      description: "tailwindcss",
+      icon: "tailwind",
+      url: "https://tailwindcss.com/",
+    },
+    {
+      id: "styled-components",
+      title: "styled-components",
+      description: "styled-components",
+      icon: "styledComponents",
+      url: "https://styled-components.com/",
+    },
+    {
+      id: "contentful",
+      title: "contentful",
+      description: "Contentful",
+      icon: "contentful",
+      url: "https://www.contentful.com/",
+    },
+    {
+      id: "fontawesome",
+      title: "Font Awesome",
+      description: "Font Awesome",
+      icon: faFontAwesomeFlag,
+      url: "https://fontawesome.com/",
+      faIcon: true,
+      size: "lg",
+    },
+  ];
+
   const missionStatement = data.blurb.edges.find(
     (b) => b.node.title === "mission statement",
   ).node;
 
   return (
-    <Layout links={data.externalLink}>
+    <Layout links={data.externalLink} techList={techList} linkList={linkList}>
       <DarkSection>
         <DarkContainer>
           <StyledH2>{missionStatement.byline}</StyledH2>
           <StyledP>{missionStatement.content.content}</StyledP>
+          <LogoLinkList
+            css={[tw`mt-5`]}
+            links={data.externalLink}
+            linkList={linkList}
+            title="Find me here:"
+            id="heading-links"
+            cmsContent
+          />
         </DarkContainer>
       </DarkSection>
       <Container>
