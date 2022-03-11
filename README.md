@@ -1,54 +1,34 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  My portfolio
-</h1>
+# My portfolio
+A simple portfolio page using [Gatsby](https://www.gatsbyjs.com/) and [Contentful](https://www.contentful.com/) CMS.
+## Install and build process
+* Run `yarn` to download and install the required modules
+* Run `yarn start` to start a local development server to see the site
+* Run `yarn build` to build the production files for deployment
 
-## 🚀 Quick start
+Please note that for local development you must set up a `.env.development` file in the root directory with the following environment variables for the project to run correctly:
+* CONTENTFUL_DELIVERY_API - The delivery API key from Contentful
+* CONTENTFUL_SPACE_ID - The Space ID for the site content you want to pull from Contentful
+* GATSBY_PORTFOLIO_PERSON - The name of the person to put at the top of the page
 
-1.  **Create a Gatsby site.**
+For production you will need to set up those environment variables on your server.
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+## Design notes
+Here are a few of the technologies used to build this page and what they're doing:
+* [react-fontawesome](https://github.com/FortAwesome/react-fontawesome) for some logos
+* [twin.macro](https://github.com/ben-rogerson/twin.macro) to allow [Emotion](https://emotion.sh/docs/introduction), [tailwindcss](https://tailwindcss.com/), and [styled-components](https://styled-components.com/) to play nicely together to style the page
+* [GraphQL](https://graphql.org/) to pull data from [Contentful](https://www.contentful.com/) to display on the page
+* [react-helmet](https://www.npmjs.com/package/react-helmet) to add the html lang property, meta, and title tags to the html
+* [Fontsource](https://fontsource.org/) to self-host the Open Sans Google font used by the page
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+The font and color scheme for the page can be edited in `tailwind.config.js` in the root directory.
 
-2.  **Start developing.**
+## Helpful resources
+Here are some resources I found helpful when building this project:
+* [How To Build A Portfolio With Gatsby — From Scratch To Deployment](https://konstantinmuenster.medium.com/how-to-build-a-portfolio-with-gatsby-from-scratch-to-deployment-cacbf7a1527) - Helpful for intial setup of the project.
+* [Twin.macro Tutorial for Beginners: Styling with Tailwind CSS and Emotion in React](https://blog.formpl.us/twin-macro-tutorial-for-beginners-styling-with-tailwind-css-and-emotion-in-react-5228c819d713) - For getting all the styling modules to play nicely together.
+* [How-to Guides](https://www.gatsbyjs.com/docs/how-to) - Gatsby has great documentation and guides to follow!
+* [gatsby-plugin-slug-field](https://www.gatsbyjs.com/plugins/gatsby-plugin-slug-field/) - For creating slugs for Node.js generated pages before I decided to make this a one page portfolio.
 
-    Navigate into your new site’s directory and start it up.
-
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
-
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+## Thank you
+* To my spouse and friends who gave me helpful feedback to improve the look, feel, and presentation of the project
+* And to you for reading this! Hope you have a great day.
