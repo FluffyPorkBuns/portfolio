@@ -19,6 +19,7 @@ Here are a few of the technologies used to build this page and what they're doin
 * [GraphQL](https://graphql.org/) to pull data from [Contentful](https://www.contentful.com/) to display on the page
 * [react-helmet](https://www.npmjs.com/package/react-helmet) to add the html lang property, meta, and title tags to the html
 * [Fontsource](https://fontsource.org/) to self-host the Open Sans Google font used by the page
+* [react-svg](https://www.npmjs.com/package/react-svg) to easily import and use the SVG files for the rest of the logos as React components
 
 The font and color scheme for the page can be edited in `tailwind.config.js` in the root directory.
 
@@ -30,5 +31,5 @@ Here are some resources I found helpful when building this project:
 * [gatsby-plugin-slug-field](https://www.gatsbyjs.com/plugins/gatsby-plugin-slug-field/) - For creating slugs for Node.js generated pages before I decided to make this a one page portfolio.
 
 ## Thank you
-* To my spouse and friends who gave me helpful feedback to improve the look, feel, and presentation of the project
+* To my spouse and friends who gave me helpful feedback to improve the look, feel, accessibility, and presentation of the project
 * And to you for reading this! Hope you have a great day.
