@@ -15,6 +15,7 @@ const ListTitle = tw.h3`
 `;
 // the list item containing the project component
 const StyledItem = tw.article`
+  bg-teal
   p-6
   pb-20
   pt-14
@@ -29,7 +30,10 @@ const StyledItem = tw.article`
   font-sans
   -mx-6
   md:mx-0
-  even:md:flex-row-reverse
+`;
+const StyledItemReverse = tw(StyledItem)`
+  md:flex-row-reverse
+  bg-offWhite
 `;
 // project thumbnail image
 const StyledItemImage = tw.div`
@@ -37,6 +41,19 @@ const StyledItemImage = tw.div`
   rounded-md
   overflow-hidden
   mb-4
+  md:mb-0
+  md:mr-8
+`;
+const StyledItemImageReverse = tw(StyledItemImage)`
+  md:mr-0
+  md:ml-8
+`;
+const StyledContent = tw.div`
+  md:ml-8
+`;
+const StyledContentReverse = tw(StyledContent)`
+  md:ml-0
+  md:mr-8
 `;
 // list of tags showing the technologies used for the project
 const TechnologyList = tw.ul`
@@ -82,34 +99,65 @@ const ProjectGallery = ({ portfolioItems }) => {
     const isOdd = index % 2 === 0;
     return (
       <li key={item.node.id}>
-        <StyledItem
-          css={[isOdd && tw`bg-teal`, !isOdd && tw`md:flex-row-reverse`]}
-        >
-          <StyledItemImage css={[isOdd ? tw`mr-8` : tw`ml-8`]}>
-            <GatsbyImage
-              image={getImage(item.node.thumbnail)}
-              alt={item.node.title}
-            />
-          </StyledItemImage>
-          <div css={isOdd ? tw`ml-8` : tw`mr-8`}>
-            <header>
-              <ListTitle>{item.node.title}</ListTitle>
-            </header>
-            <p>{item.node.content}</p>
-            <footer>
-              <TechnologyTitle id={`technologies-${item.node.id}`}>
-                Technologies:
-              </TechnologyTitle>
-              <TechnologyList aria-describedby={`technologies-${item.node.id}`}>
-                {renderTags({
-                  tags: item.node.technologies,
-                  id: item.node.id,
-                  isOdd: isOdd,
-                })}
-              </TechnologyList>
-            </footer>
-          </div>
-        </StyledItem>
+        {isOdd ? (
+          <StyledItem>
+            <StyledItemImage>
+              <GatsbyImage
+                image={getImage(item.node.thumbnail)}
+                alt={item.node.title}
+              />
+            </StyledItemImage>
+            <StyledContent css={isOdd ? tw`ml-8` : tw`mr-8`}>
+              <header>
+                <ListTitle>{item.node.title}</ListTitle>
+              </header>
+              <p>{item.node.content}</p>
+              <footer>
+                <TechnologyTitle id={`technologies-${item.node.id}`}>
+                  Technologies:
+                </TechnologyTitle>
+                <TechnologyList
+                  aria-describedby={`technologies-${item.node.id}`}
+                >
+                  {renderTags({
+                    tags: item.node.technologies,
+                    id: item.node.id,
+                    isOdd: isOdd,
+                  })}
+                </TechnologyList>
+              </footer>
+            </StyledContent>
+          </StyledItem>
+        ) : (
+          <StyledItemReverse>
+            <StyledItemImageReverse css={[isOdd ? tw`mr-8` : tw`ml-8`]}>
+              <GatsbyImage
+                image={getImage(item.node.thumbnail)}
+                alt={item.node.title}
+              />
+            </StyledItemImageReverse>
+            <StyledContentReverse css={isOdd ? tw`ml-8` : tw`mr-8`}>
+              <header>
+                <ListTitle>{item.node.title}</ListTitle>
+              </header>
+              <p>{item.node.content}</p>
+              <footer>
+                <TechnologyTitle id={`technologies-${item.node.id}`}>
+                  Technologies:
+                </TechnologyTitle>
+                <TechnologyList
+                  aria-describedby={`technologies-${item.node.id}`}
+                >
+                  {renderTags({
+                    tags: item.node.technologies,
+                    id: item.node.id,
+                    isOdd: isOdd,
+                  })}
+                </TechnologyList>
+              </footer>
+            </StyledContentReverse>
+          </StyledItemReverse>
+        )}
       </li>
     );
   });
