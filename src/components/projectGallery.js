@@ -29,6 +29,7 @@ const StyledItem = tw.article`
   font-sans
   -mx-6
   md:mx-0
+  even:md:flex-row-reverse
 `;
 // project thumbnail image
 const StyledItemImage = tw.div`
