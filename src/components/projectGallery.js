@@ -107,7 +107,7 @@ const ProjectGallery = ({ portfolioItems }) => {
                 alt={item.node.title}
               />
             </StyledItemImage>
-            <StyledContent css={isOdd ? tw`ml-8` : tw`mr-8`}>
+            <StyledContent>
               <header>
                 <ListTitle>{item.node.title}</ListTitle>
               </header>
@@ -130,13 +130,13 @@ const ProjectGallery = ({ portfolioItems }) => {
           </StyledItem>
         ) : (
           <StyledItemReverse>
-            <StyledItemImageReverse css={[isOdd ? tw`mr-8` : tw`ml-8`]}>
+            <StyledItemImageReverse>
               <GatsbyImage
                 image={getImage(item.node.thumbnail)}
                 alt={item.node.title}
               />
             </StyledItemImageReverse>
-            <StyledContentReverse css={isOdd ? tw`ml-8` : tw`mr-8`}>
+            <StyledContentReverse>
               <header>
                 <ListTitle>{item.node.title}</ListTitle>
               </header>
